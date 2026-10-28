@@ -23,7 +23,7 @@ Camera3D camera = {
 };
 
 const Vector4 points[] = {
-  // Inner cube
+  // Cube at w = +1 (drawn red)
   {-1, -1, -1, +1},
   {+1, -1, -1, +1},
   {+1, +1, -1, +1},
@@ -33,7 +33,7 @@ const Vector4 points[] = {
   {+1, +1, +1, +1},
   {-1, +1, +1, +1},
 
-  // Outer cube
+  // Cube at w = -1 (drawn blue)
   {-1, -1, -1, -1},
   {+1, -1, -1, -1},
   {+1, +1, -1, -1},
@@ -129,21 +129,21 @@ void draw_tesseract(void) {
     DrawSphere(points_3[i], 0.1, color);
   }
 
-  // Inner cube lines
+  // w = +1 cube edges
   for (size_t i = 0; i < ARRAY_LEN(indices); ++i) {
     int i0 = indices[i][0];
     int i1 = indices[i][1];
     DrawLine3D(points_3[i0], points_3[i1], RED);
   }
 
-  // Outer cube lines
+  // w = -1 cube edges
   for (size_t i = 0; i < ARRAY_LEN(indices); ++i) {
     int i0 = indices[i][0] + 8;
     int i1 = indices[i][1] + 8;
     DrawLine3D(points_3[i0], points_3[i1], BLUE);
   }
 
-  // Diagnal cube lines
+  // Edges joining the two cubes
   for (size_t i = 0; i < 8; ++i) {
     int i0 = indices[i][0];
     int i1 = i0 + 8;
@@ -152,7 +152,7 @@ void draw_tesseract(void) {
 }
 
 int main(void) {
-  InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera free");
+  InitWindow(screenWidth, screenHeight, "Tesseract");
 
   // Define the camera to look into our 3d world
   SetTargetFPS(60);
